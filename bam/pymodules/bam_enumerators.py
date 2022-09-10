@@ -8,7 +8,7 @@ from enum import Enum
 class MonthsEnum(Enum):
     """
     MonthsEnum: months enumerator class
-    """    
+    """
     JANUARY = 1
     FEBRUARY = 2
     MARCH = 3
@@ -26,7 +26,7 @@ class MonthsEnum(Enum):
 class IncomeEnum(Enum):
     """
     IncomeEnum: Income type enumerator class
-    """    
+    """
     SALARY = 1
     EXTERNAL_INCOME = 2
 
@@ -34,7 +34,7 @@ class IncomeEnum(Enum):
 class ExpenditureEnum(Enum):
     """
     ExpenditureEnum: Expenditure type enumerator class
-    """    
+    """
     RENT = 1
     CAR = 2
     HEALTH = 3
@@ -45,7 +45,7 @@ class ExpenditureEnum(Enum):
 class LanguageEnum(Enum):
     """
     LanguageEnum: Language enumerator class
-    """    
+    """
     ENGLISH = 'en'
     ITALIANO = 'it'
 
@@ -53,7 +53,7 @@ class LanguageEnum(Enum):
 class ColorMenuBgEnum(Enum):
     """
     ColorMenuBgEnum: Menu background color enumerator class
-    """    
+    """
     BLACK = 'bg_black'
     BLUE = 'bg_blue'
     CYAN = 'bg_cyan'
@@ -67,7 +67,7 @@ class ColorMenuBgEnum(Enum):
 class ColorMenuFgEnum(Enum):
     """
     ColorMenuFgEnum: Menu foreground color enumerator class
-    """    
+    """
     BLACK = 'fg_black'
     BLUE = 'fg_blue'
     CYAN = 'fg_cyan'

@@ -4,8 +4,9 @@ Contains the base classes of the project.
 """
 
 import time
+from typing import List
 
-from bam_enumerators import IncomeEnum
+from bam.pymodules import ExpenditureEnum, IncomeEnum
 
 
 class Transaction:
@@ -97,13 +98,13 @@ class Income(Transaction):
     def __init__(self, value: float) -> None:
         """Constructor method
 
-        :param value: absolute income value without sign 
+        :param value: absolute income value without sign
         :type value: float
         """
         super().__init__(value=value)
-        self.__type: IncomeEnum = IncomeEnum.EXTERNAL_INCOME
+        self.__type: IncomeEnum | None = None
 
-    def get_type(self) -> IncomeEnum:
+    def get_type(self) -> IncomeEnum | None:
         """
         get_type self.__type getter method
 
@@ -111,3 +112,95 @@ class Income(Transaction):
         :rtype: IncomeEnum
         """
         return self.__type
+
+
+class Expenditure(Transaction):
+    """
+    Expenditure class
+    Builds an object Transaction.Expenditure
+    """
+
+    def __init__(self, value: float) -> None:
+        """Constructor method
+
+        :param value: absolute expenditure value without sign
+        :type value: float
+        """
+        super().__init__(value=value)
+        self.__type: ExpenditureEnum | None = None
+
+    def get_type(self) -> ExpenditureEnum | None:
+        """
+        get_type self.__type getter method
+
+        :return: self.__type
+        :rtype: ExpenditureEnum
+        """
+        return self.__type
+
+
+class Balance:
+    """
+    Balance class
+    Builds an object Balance
+    """
+
+    def __init__(self, initial_balance: float = 0.0) -> None:
+        self.__balance = initial_balance
+        self.__incomes: List[Income] | None = None
+        self.__expenditures: List[Expenditure] | None = None
+
+    def __update_balance(self) -> None:
+        """
+        __update_balance updates balance value permorming an algebric sum
+        between incomes and expenditures
+        """
+        total_income = 0.0
+        total_expenditure = 0.0
+        if self.__incomes is not None:
+            for income in self.__incomes:
+                total_income += income.get_value()
+        if self.__expenditures is not None:
+            for expenditure in self.__expenditures:
+                total_expenditure += expenditure.get_value()
+        self.__balance = total_income - total_expenditure
+
+    def add_income(self, income: Income) -> None:
+        """
+        add_income adds an income to the balance list of incomes, then
+        ricalculates the balance
+
+        :param income: income to be added to the balance
+        :type income: Income
+        """
+        if self.__incomes is not None:
+            self.__incomes.append(income)
+        else:
+            self.__incomes = [income]
+        self.__update_balance()
+
+    def add_expenditure(self, expenditure: Expenditure) -> None:
+        """
+        add_income adds an expenditure to the balance list of expenditures, then
+        ricalculates the balance
+
+        :param expenditure: expenditure to be added to the balance
+        :type income: Expenditure
+        """
+        if self.__expenditures is not None:
+            self.__expenditures.append(expenditure)
+        else:
+            self.__expenditures = [expenditure]
+        self.__update_balance()
+
+    def get_balance(self) -> float:
+        """
+        get_balance self.__balance getter method
+
+        :return: self.__balance
+        :rtype: float
+        """
+        return self.__balance
+
+    # TODO: add method to get the balance inside time range, incomes and
+    # expenditures inside time range as well.

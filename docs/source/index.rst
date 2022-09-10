@@ -7,10 +7,11 @@ Welcome to bam's documentation!
 ===============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 6
    :caption: Contents:
 
    modules
+
 
 Indices and tables
 ==================

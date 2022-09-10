@@ -19,7 +19,7 @@ class UtilsFunc:
 
         :return: root path of the program
         :rtype: str
-        """        
+        """
         root_path = __file__.split('/')
         root_path = '/'.join(root_path[0:root_path.index('money_management')+1])
         return root_path
@@ -28,7 +28,7 @@ class UtilsFunc:
     def print_title(value: str) -> None:
         """
         print_title Fancy print of a title
-        """        
+        """
         os.system("clear")
         header_line = "="*40
         print(header_line, flush=True)
@@ -38,4 +38,6 @@ class UtilsFunc:
     # TODO: implement data backup function
     @staticmethod
     def data_backup() -> None:
-        pass
+        """
+        data_backup method to create a data backup
+        """

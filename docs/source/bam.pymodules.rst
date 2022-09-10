@@ -4,6 +4,14 @@ bam.pymodules package
 Submodules
 ----------
 
+bam.pymodules.bam\_classes module
+---------------------------------
+
+.. automodule:: bam.pymodules.bam_classes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 bam.pymodules.bam\_enumerators module
 -------------------------------------
 
