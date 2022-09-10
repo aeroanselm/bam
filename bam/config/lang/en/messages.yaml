@@ -1,0 +1,50 @@
+Main Menu:
+  - id: 0
+    description: Selected account main menu msg
+    msg: Selected Account
+  - id: 1
+    description: Selected language main menu msg
+    msg: Language
+Create New Account:
+  - id: 0
+    description: Input message
+    msg: Insert new bank account name
+  - id: 1
+    description: Confirm new bank account creation
+    msg: Created account
+Show Accounts:
+  - id: 0
+    description: Start print account list
+    msg: List of available Bank Accounts
+  - id: 1
+    description: Notify empty account list
+    msg: No Bank Account found
+Load Account:
+  - id: 0
+    description: input message
+    msg: Select the account you want to load
+  - id: 1
+    description: Confirm account loading
+    msg: Loaded account
+  - id: 2
+    description: Notify empty account list
+    msg: No Bank Account found
+General:
+  - id: 0
+    description: Type for continue message
+    msg: Press Enter to continue
+  - id: 1
+    description: General input message
+    msg: Select an option
+Select Language:
+  - id: 0
+    description: Input message
+    msg: Select language
+Select Menu Background Color:
+  - id: 0
+    description: Input message
+    msg: Select menu background color
+Select Menu Foreground Color:
+  - id: 0
+    description: Input message
+    msg: Select menu foreground color
