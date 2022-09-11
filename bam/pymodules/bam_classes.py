@@ -204,3 +204,53 @@ class Balance:
 
     # TODO: add method to get the balance inside time range, incomes and
     # expenditures inside time range as well.
+
+class BankAccount:
+    """
+    BankAccount class
+    Builds an objecet BankAccount
+    """
+
+    def __init__(self, name: str = "DefaultBankAccount") -> None:
+        """
+        __init__ Constructor
+
+        :param name: bank account name, defaults to "DefaultBankAccount"
+        :type name: str, optional
+        """        
+        self.__name = name
+        self.__balance: Balance = Balance()
+
+    def get_name(self) -> str:
+        """
+        get_name self.__name getter method
+
+        :return: bank account name
+        :rtype: str
+        """        
+        return self.__name
+
+    def get_balance(self) -> Balance:
+        """
+        get_balance self.__balance getter method
+
+        :return: bank account balance
+        :rtype: Balance
+        """             
+        return self.__balance
+    
+    def set_balance(self, balance: Balance) -> None:
+        """
+        set_balance self.__balance setter method
+
+        :param balance: set bank account balance
+        :type balance: Balance
+        """        
+        self.__balance = balance
+
+class BalanceGraphs:
+    """
+     BalanceGrpahs class
+     Builds an object BalanceClass
+    """    
+    # TODO: create grapsh 
