@@ -4,8 +4,10 @@ Contains the base classes of the project.
 """
 
 import time
-from typing import List
+from typing import Any, List
 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 from bam.pymodules import ExpenditureEnum, IncomeEnum
 
 
@@ -25,7 +27,7 @@ class Transaction:
         self.__value = value
         self.__description = ""
         self.__subscription = False
-        self.__id = ""
+        self.__id: str = ""
         self.__assign_id()
 
     def __assign_id(self) -> None:
@@ -102,14 +104,14 @@ class Income(Transaction):
         :type value: float
         """
         super().__init__(value=value)
-        self.__type: IncomeEnum | None = None
+        self.__type: str = ""
 
-    def get_type(self) -> IncomeEnum | None:
+    def get_type(self) -> str:
         """
         get_type self.__type getter method
 
         :return: self.__type
-        :rtype: IncomeEnum
+        :rtype: str
         """
         return self.__type
 
@@ -127,14 +129,14 @@ class Expenditure(Transaction):
         :type value: float
         """
         super().__init__(value=value)
-        self.__type: ExpenditureEnum | None = None
+        self.__type: str = ""
 
-    def get_type(self) -> ExpenditureEnum | None:
+    def get_type(self) -> str:
         """
         get_type self.__type getter method
 
         :return: self.__type
-        :rtype: ExpenditureEnum
+        :rtype: str
         """
         return self.__type
 
@@ -202,8 +204,82 @@ class Balance:
         """
         return self.__balance
 
-    # TODO: add method to get the balance inside time range, incomes and
-    # expenditures inside time range as well.
+    def remove_income(self, transaction_id: str) -> None:
+        """
+        remove_income search and remove the income with a prescribed id
+
+        :param transaction_id: income specific id
+        :type transaction_id: str
+        """
+        if self.__incomes is not None:
+            for item in self.__incomes:
+                if item.get_id() == transaction_id:
+                    del item
+                    break
+
+    def remove_expenditure(self, transaction_id: str) -> None:
+        """
+        remove_expenditure search and remove the income with a prescribed id
+
+        :param transaction_id: expenditure specific id
+        :type transaction_id: str
+        """
+        if self.__expenditures is not None:
+            for item in self.__expenditures:
+                if item.get_id() == transaction_id:
+                    del item
+                    break
+
+    def get_income(self, transaction_id: str) -> None | Income:
+        """
+        get_income get income with specific transaction id
+
+        :param transaction_id: transaction id
+        :type transaction_id: str
+        :return: income item
+        :rtype: None | Income
+        """
+        if self.__incomes is not None:
+            for item in self.__incomes:
+                if item.get_id() == transaction_id:
+                    return item
+            return None
+        return None
+
+    def get_expenditure(self, transaction_id: str) -> None | Expenditure:
+        """
+        get_expenditure get expenditure with specific transaction id
+
+        :param transaction_id: transaction id
+        :type transaction_id: str
+        :return: expenditure item
+        :rtype: None | Expenditure
+        """
+        if self.__expenditures is not None:
+            for item in self.__expenditures:
+                if item.get_id() == transaction_id:
+                    return item
+            return None
+        return None
+
+    def get_expenditures_list(self) -> List[Expenditure] | None:
+        """
+        get_expenditures_list getter method for self.__expenditures
+
+        :return: get balance expenditures list
+        :rtype: List[Expenditure] | None
+        """
+        return self.__expenditures
+
+    def get_incomes_list(self) -> List[Income] | None:
+        """
+        get_incomes_list getter method for self.__incomes
+
+        :return: get balance incomes list
+        :rtype: List[Income] | None
+        """
+        return self.__incomes
+
 
 class BankAccount:
     """
@@ -217,7 +293,7 @@ class BankAccount:
 
         :param name: bank account name, defaults to "DefaultBankAccount"
         :type name: str, optional
-        """        
+        """
         self.__name = name
         self.__balance: Balance = Balance()
 
@@ -227,7 +303,7 @@ class BankAccount:
 
         :return: bank account name
         :rtype: str
-        """        
+        """
         return self.__name
 
     def get_balance(self) -> Balance:
@@ -236,21 +312,35 @@ class BankAccount:
 
         :return: bank account balance
         :rtype: Balance
-        """             
+        """
         return self.__balance
-    
+
     def set_balance(self, balance: Balance) -> None:
         """
         set_balance self.__balance setter method
 
         :param balance: set bank account balance
         :type balance: Balance
-        """        
+        """
         self.__balance = balance
 
-class BalanceGraphs:
-    """
-     BalanceGrpahs class
-     Builds an object BalanceClass
-    """    
-    # TODO: create grapsh 
+    def save_data_to_json(self) -> None:
+
+        # Extracting Incomes and Expenditures lists
+        expenditures = self.__balance.get_expenditures_list()
+        incomes = self.__balance.get_incomes_list()
+
+        # Saving Transactions as json format
+        expenditure_dict = expenditures.__dict__
+        income_dict = incomes.__dict__
+
+
+# class BalanceGraphs:
+#     """
+#     BalanceGrpahs class
+#     Builds an object BalanceClass
+#     """
+#     # TODO: create grapsh
+
+#     def __init__(self, balance: Balance) -> None:
+#         self.__balance = balance
