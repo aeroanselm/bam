@@ -4,17 +4,59 @@ Contains the base classes of the project.
 """
 
 import time
-from typing import Any, List
+from typing import Any, Dict, List
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from bam.pymodules import ExpenditureEnum, IncomeEnum
+from bam.pymodules.bam_enumerators import (ColorMenuBgEnum, ColorMenuFgEnum,
+                                           LanguageEnum)
+
+
+class ProgramSettings:
+    def __init__(
+            self,
+            language: LanguageEnum,
+            terminal_bg_color: ColorMenuBgEnum,
+            terminal_fg_color: ColorMenuFgEnum) -> None:
+
+        self.__language = language
+        self.__terminal_bg_color = terminal_bg_color
+        self.__terminal_fg_color = terminal_fg_color
+
+    def get_language(self) -> LanguageEnum:
+        return self.__language
+
+    def set_language(self, language: LanguageEnum) -> None:
+        self.__language = language
+
+    def get_terminal_bg_color(self) -> ColorMenuBgEnum:
+        return self.__terminal_bg_color
+
+    def set_terminal_bg_color(self, terminal_bg_color: ColorMenuBgEnum) -> None:
+        self.__terminal_bg_color = terminal_bg_color
+
+    def get_terminal_fg_color(self) -> ColorMenuFgEnum:
+        return self.__terminal_fg_color
+
+    def set_terminal_fg_color(self, terminal_fg_color: ColorMenuFgEnum) -> None:
+        self.__terminal_fg_color = terminal_fg_color
+
+
+class ProgramMessages:
+    def __init__(self) -> None:
+
+    def __load_program_messages(self) -> None:
+        pass
+
+    def get_program_messages(self) -> Dict[Any, Any]:
+        pass
 
 
 class Transaction:
     """
-     Transaction class
-     Builds an object Transaction
+    Transaction class
+    Builds an object Transaction
     """
 
     def __init__(self, value: float) -> None:
@@ -324,15 +366,15 @@ class BankAccount:
         """
         self.__balance = balance
 
-    def save_data_to_json(self) -> None:
+    # def save_data_to_json(self) -> None:
 
-        # Extracting Incomes and Expenditures lists
-        expenditures = self.__balance.get_expenditures_list()
-        incomes = self.__balance.get_incomes_list()
+    #     # Extracting Incomes and Expenditures lists
+    #     expenditures = self.__balance.get_expenditures_list()
+    #     incomes = self.__balance.get_incomes_list()
 
-        # Saving Transactions as json format
-        expenditure_dict = expenditures.__dict__
-        income_dict = incomes.__dict__
+    #     # Saving Transactions as json format
+    #     expenditure_dict = expenditures.__dict__
+    #     income_dict = incomes.__dict__
 
 
 # class BalanceGraphs:
