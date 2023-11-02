@@ -7,11 +7,11 @@ Main Menu:
   alias: main_menu # DONE
   menu_list:
   - id: 0
-    label: Create New Account # DONE, to be completed
+    label: Create New Account # TBD, to be completed
   - id: 1
-    label: Load Account # DONE
+    label: Select Account # TBD
   - id: 2
-    label: Save Account # DONE
+    label: Save Account # _
   - id: 3
     label: Delete Account # DONE
   - id: 4

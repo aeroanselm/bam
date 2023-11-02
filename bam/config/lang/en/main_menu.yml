@@ -1,0 +1,20 @@
+Main Menu:
+    alias: main_menu
+    menu_list:
+    - id: 0
+      label: Create New Account
+    - id: 1
+      label: Select Account
+    - id: 2
+      label: Save Account
+    - id: 3
+      label: Delete Account
+    - id: 4
+      label: Show Accounts
+    - id: 5
+      label: Analyze Data
+    - id: 6
+      label: Manage Account
+    - id: 7
+      label: Settings
+  

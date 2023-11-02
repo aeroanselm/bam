@@ -8,49 +8,104 @@ from typing import Any, Dict, List
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import yaml
+
+from bam.common.utils import Utils
 from bam.pymodules import ExpenditureEnum, IncomeEnum
 from bam.pymodules.bam_enumerators import (ColorMenuBgEnum, ColorMenuFgEnum,
                                            LanguageEnum)
 
 
 class ProgramSettings:
-    def __init__(
-            self,
-            language: LanguageEnum,
-            terminal_bg_color: ColorMenuBgEnum,
-            terminal_fg_color: ColorMenuFgEnum) -> None:
+    """Class providing all the setting related to the program
+    """
 
-        self.__language = language
-        self.__terminal_bg_color = terminal_bg_color
-        self.__terminal_fg_color = terminal_fg_color
+    def __init__(self) -> None:
+        """Constructor method
+        """
+        self.__language: LanguageEnum
+        self.__terminal_bg_color: ColorMenuBgEnum
+        self.__terminal_fg_color: ColorMenuFgEnum
+
+        self._load_config()
+
+    def _load_config(self) -> None:
+        """Loads program configuration
+        """
+        with open(file="./bam/config/config.yml", mode='r', encoding='utf-8') as file:
+            self.__config = yaml.load(  # type: ignore
+                stream=file, Loader=yaml.SafeLoader)
+        self.__language = Utils.string_to_language_enum(
+            self.__config["Settings"]["Lang"])
+        self.__terminal_bg_color = Utils.string_to_color_menu_bg_enum(
+            self.__config["Settings"]["BgColor"])
+        self.__terminal_fg_color = Utils.string_to_color_menu_fg_enum(
+            self.__config["Settings"]["FgColor"])
 
     def get_language(self) -> LanguageEnum:
+        """Getter method for language parameter
+
+        Returns:
+            LanguageEnum: language parameter
+        """
         return self.__language
 
     def set_language(self, language: LanguageEnum) -> None:
+        """Setter method for language parameter
+
+        Args:
+            language (LanguageEnum): language parameter
+        """
         self.__language = language
 
     def get_terminal_bg_color(self) -> ColorMenuBgEnum:
+        """Getter method for background color parameter
+
+        Returns:
+            ColorMenuBgEnum: background color parameter
+        """
         return self.__terminal_bg_color
 
     def set_terminal_bg_color(self, terminal_bg_color: ColorMenuBgEnum) -> None:
+        """Setter method for background color parameter
+
+        Args:
+            terminal_bg_color (ColorMenuBgEnum): background color parameter
+        """
         self.__terminal_bg_color = terminal_bg_color
 
     def get_terminal_fg_color(self) -> ColorMenuFgEnum:
+        """Getter method for foreground color parameter
+
+        Returns:
+            ColorMenuFgEnum: foreground color paramenter
+        """
         return self.__terminal_fg_color
 
     def set_terminal_fg_color(self, terminal_fg_color: ColorMenuFgEnum) -> None:
+        """Setter method for foreground color parameter
+
+        Args:
+            terminal_fg_color (ColorMenuFgEnum): foreground color parameter
+        """
         self.__terminal_fg_color = terminal_fg_color
 
 
-class ProgramMessages:
-    def __init__(self) -> None:
+# class ProgramMessages:
+#     """Class managing the program user messages. The program supports multiple
+#     languages and they are all defined inside config/lang/ dir.
+#     """
 
-    def __load_program_messages(self) -> None:
-        pass
+#     def __init__(self, program_settings: ProgramSettings) -> None:
+#         self._program_settings = program_settings
+#         self._language = program_settings.get_language()
 
-    def get_program_messages(self) -> Dict[Any, Any]:
-        pass
+#     def __load_program_messages(self) -> None:
+#         lang = self._language
+#         messages = yaml.load(f"./bam/config/lang/{}")
+
+#     def get_program_messages(self) -> Dict[Any, Any]:
+#         lang = self._language.name
 
 
 class Transaction:

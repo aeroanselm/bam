@@ -3,26 +3,79 @@ Utils module.
 Contains the definitions of utility functions of the program.
 """
 
+# pylint: disable=invalid-name
+
 import os
 
+from bam.pymodules.bam_enumerators import (ColorMenuBgEnum, ColorMenuFgEnum,
+                                           LanguageEnum)
 
-class UtilsFunc:
-    """
-    UtilsFunc class
-    Builds an object UtilsFunc
+
+class Utils:
+    """Utils class containing general purpose static methods of the program
+
+    Returns:
+        Utils: instance of Utils class
     """
 
     @staticmethod
     def root_path_detector() -> str:
-        """
-        root_path_detector detects the root path of the program
+        """Detects the rooth path directory of the program
 
-        :return: root path of the program
-        :rtype: str
+        Returns:
+            str: root_path_detector detects the root path of the program
+
         """
-        root_path = __file__.split('/')
-        root_path = '/'.join(root_path[0:root_path.index('money_management')+1])
-        return root_path
+
+        return os.getcwd()
+
+    @staticmethod
+    def string_to_language_enum(lang: str) -> LanguageEnum:
+        """Map the input string to the Enum with equal value
+
+        Args:
+            lang (str): input string
+
+        Returns:
+            LanguageEnum: output enum
+        """
+        for x in LanguageEnum:
+            if lang == x.value:
+                return x
+
+        return LanguageEnum.ENGLISH
+
+    @staticmethod
+    def string_to_color_menu_bg_enum(color: str) -> ColorMenuBgEnum:
+        """Map the input string to the Enum with equal value
+
+        Args:
+            color (str): input string
+
+        Returns:
+            ColorMenuBgEnum: output enum
+        """
+        for x in ColorMenuBgEnum:
+            if color == x.value:
+                return x
+
+        return ColorMenuBgEnum.GREEN
+
+    @staticmethod
+    def string_to_color_menu_fg_enum(color: str) -> ColorMenuFgEnum:
+        """Map the input string to the Enum with equal value
+
+        Args:
+            color (str): input string
+
+        Returns:
+            ColorMenuFgEnum: output enum
+        """
+        for x in ColorMenuFgEnum:
+            if color == x.value:
+                return x
+
+        return ColorMenuFgEnum.GRAY
 
     @staticmethod
     def print_title(value: str) -> None:
